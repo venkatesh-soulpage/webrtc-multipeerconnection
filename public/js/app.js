@@ -166,16 +166,16 @@ connection.processSdp = function (sdp) {
 
 // https://www.rtcmulticonnection.org/docs/iceServers/
 // use your own TURN-server here!
-// connection.iceServers = [
-//   {
-//     urls: [
-//       "stun:stun.l.google.com:19302",
-//       "stun:stun1.l.google.com:19302",
-//       "stun:stun2.l.google.com:19302",
-//       "stun:stun.l.google.com:19302?transport=udp",
-//     ],
-//   },
-// ];
+connection.iceServers = [
+  {
+    urls: [
+      "stun:stun.l.google.com:19302",
+      "stun:stun1.l.google.com:19302",
+      "stun:stun2.l.google.com:19302",
+      "stun:stun.l.google.com:19302?transport=udp",
+    ],
+  },
+];
 
 connection.videosContainer = document.getElementById("videos-container");
 connection.onstream = function (event) {
@@ -400,14 +400,14 @@ if (roomid && roomid.length) {
       if (isRoomExist) {
         connection.join(roomid);
 
-        connection.socket.on("connect", function () {
-          connection.socket.on("token", function (token) {
-            console.log("token received");
-            connection.iceServers = token.iceServers;
-          });
-          connection.socket.emit("token");
-          console.log("token", connection.iceServers);
-        });
+        // connection.socket.on("connect", function () {
+        //   connection.socket.on("token", function (token) {
+        //     console.log("token received");
+        //     connection.iceServers = token.iceServers;
+        //   });
+        //   connection.socket.emit("token");
+        //   console.log("token", connection.iceServers);
+        // });
         return;
       }
 
