@@ -177,8 +177,6 @@ connection.processSdp = function (sdp) {
 //   },
 // ];
 
-connection.iceServers = [];
-
 connection.videosContainer = document.getElementById("videos-container");
 connection.onstream = function (event) {
   var existing = document.getElementById(event.streamid);
@@ -318,16 +316,6 @@ function disableInputButtons(enable) {
   document.getElementById("open-room").disabled = !enable;
   document.getElementById("join-room").disabled = !enable;
   document.getElementById("room-id").disabled = !enable;
-
-  socket = io();
-  socket.on("connect", function () {
-    socket.on("token", function (token) {
-      console.log("token received");
-      connection.iceServers.push(token.iceServers);
-    });
-    socket.emit("token");
-    console.log("token", connection.iceServers);
-  });
 }
 
 // ......................................................
@@ -411,6 +399,15 @@ if (roomid && roomid.length) {
     connection.checkPresence(roomid, function (isRoomExist) {
       if (isRoomExist) {
         connection.join(roomid);
+
+        connection.socket.on("connect", function () {
+          connection.socket.on("token", function (token) {
+            console.log("token received");
+            connection.iceServers = token.iceServers;
+          });
+          connection.socket.emit("token");
+          console.log("token", connection.iceServers);
+        });
         return;
       }
 
