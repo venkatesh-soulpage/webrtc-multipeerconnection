@@ -2,7 +2,6 @@
 // .......................UI Code........................
 // ......................................................
 
-var socket;
 document.getElementById("open-room").onclick = function () {
   console.log("clicked");
   disableInputButtons();
@@ -27,6 +26,13 @@ document.getElementById("open-room").onclick = function () {
       alert(error);
     }
   });
+  // connection.socket.on("connect", function () {
+  //   connection.socket.on("token", function (token) {
+  //     console.log("token received");
+  //     connection.iceServers = token.iceServers;
+  //   });
+  //   connection.socket.emit("token");
+  // });
 };
 
 document.getElementById("join-room").onclick = function () {
@@ -166,14 +172,27 @@ connection.processSdp = function (sdp) {
 
 // https://www.rtcmulticonnection.org/docs/iceServers/
 // use your own TURN-server here!
+// connection.iceServers = [
+//   {
+//     urls: [
+//       // "stun:stun.l.google.com:19302",
+//       // "stun:stun1.l.google.com:19302",
+//       // "stun:stun2.l.google.com:19302",
+//       // "stun:stun.l.google.com:19302?transport=udp",
+//       "stun:bn-turn1.xirsys.com",
+//       "turn:bn-turn1.xirsys.com:80?transport=udp",
+//       "turn:bn-turn1.xirsys.com:3478?transport=udp",
+//       "turn:bn-turn1.xirsys.com:80?transport=tcp",
+//       "turn:bn-turn1.xirsys.com:3478?transport=tcp",
+//       "turns:bn-turn1.xirsys.com:443?transport=tcp",
+//       "turns:bn-turn1.xirsys.com:5349?transport=tcp",
+//     ],
+//   },
+// ];
+
 connection.iceServers = [
   {
     urls: [
-      // "stun:stun.l.google.com:19302",
-      // "stun:stun1.l.google.com:19302",
-      // "stun:stun2.l.google.com:19302",
-      // "stun:stun.l.google.com:19302?transport=udp",
-      "stun:bn-turn1.xirsys.com",
       "turn:bn-turn1.xirsys.com:80?transport=udp",
       "turn:bn-turn1.xirsys.com:3478?transport=udp",
       "turn:bn-turn1.xirsys.com:80?transport=tcp",
@@ -183,7 +202,6 @@ connection.iceServers = [
     ],
   },
 ];
-
 connection.videosContainer = document.getElementById("videos-container");
 connection.onstream = function (event) {
   var existing = document.getElementById(event.streamid);
@@ -407,14 +425,6 @@ if (roomid && roomid.length) {
       if (isRoomExist) {
         connection.join(roomid);
 
-        // connection.socket.on("connect", function () {
-        //   connection.socket.on("token", function (token) {
-        //     console.log("token received");
-        //     connection.iceServers = token.iceServers;
-        //   });
-        //   connection.socket.emit("token");
-        //   console.log("token", connection.iceServers);
-        // });
         return;
       }
 
