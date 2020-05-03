@@ -179,30 +179,32 @@ connection.processSdp = function (sdp) {
 connection.iceServers = [];
 
 // second step, set STUN url
-connection.iceServers.push({
-  urls: [
-    "turn:bn-turn1.xirsys.com:80?transport=udp",
-    "turn:bn-turn1.xirsys.com:3478?transport=udp",
-    "turn:bn-turn1.xirsys.com:80?transport=tcp",
-    "turn:bn-turn1.xirsys.com:3478?transport=tcp",
-    "turns:bn-turn1.xirsys.com:443?transport=tcp",
-    "turns:bn-turn1.xirsys.com:5349?transport=tcp",
-  ],
-});
+// connection.iceServers.push({
+//   urls: [
+//     "turn:bn-turn1.xirsys.com:80?transport=udp",
+//     "turn:bn-turn1.xirsys.com:3478?transport=udp",
+//     "turn:bn-turn1.xirsys.com:80?transport=tcp",
+//     "turn:bn-turn1.xirsys.com:3478?transport=tcp",
+//     "turns:bn-turn1.xirsys.com:443?transport=tcp",
+//     "turns:bn-turn1.xirsys.com:5349?transport=tcp",
+//   ],
+// });
+connection.iceServers.push({ urls: "stun:bn-turn1.xirsys.com" });
 
 // last step, set TURN url (recommended)
 connection.iceServers.push({
   username:
     "XsgQNxasaXVCCqkntYvxeBT_zG61w-IN8m0hzNwNocMT_adLD8DIGWkO4qjMCy0SAAAAAF6uqIh2ZW5rYXRlc2ht",
-  urls: [
-    "stun:bn-turn1.xirsys.com",
-    "turn:bn-turn1.xirsys.com:80?transport=udp",
-    "turn:bn-turn1.xirsys.com:3478?transport=udp",
-    "turn:bn-turn1.xirsys.com:80?transport=tcp",
-    "turn:bn-turn1.xirsys.com:3478?transport=tcp",
-    "turns:bn-turn1.xirsys.com:443?transport=tcp",
-    "turns:bn-turn1.xirsys.com:5349?transport=tcp",
-  ],
+  // urls: [
+  //   "stun:bn-turn1.xirsys.com",
+  //   "turn:bn-turn1.xirsys.com:80?transport=udp",
+  //   "turn:bn-turn1.xirsys.com:3478?transport=udp",
+  //   "turn:bn-turn1.xirsys.com:80?transport=tcp",
+  //   "turn:bn-turn1.xirsys.com:3478?transport=tcp",
+  //   "turns:bn-turn1.xirsys.com:443?transport=tcp",
+  //   "turns:bn-turn1.xirsys.com:5349?transport=tcp",
+  // ],
+  urls: "turn:bn-turn1.xirsys.com:80?transport=udp",
   credential: "d282b8d0-8d2f-11ea-a6c5-9646de0e6ccd",
 });
 
