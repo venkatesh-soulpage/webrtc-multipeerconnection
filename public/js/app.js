@@ -173,36 +173,46 @@ connection.processSdp = function (sdp) {
 // https://www.rtcmulticonnection.org/docs/iceServers/
 // use your own TURN-server here!
 
-connection.iceServers = [];
+// connection.iceServers = [];
 
-// second step, set STUN url
-connection.iceServers.push({
-  urls: [
-    "turn:bn-turn1.xirsys.com:80?transport=udp",
-    "turn:bn-turn1.xirsys.com:3478?transport=udp",
-    "turn:bn-turn1.xirsys.com:80?transport=tcp",
-    "turn:bn-turn1.xirsys.com:3478?transport=tcp",
-    "turns:bn-turn1.xirsys.com:443?transport=tcp",
-    "turns:bn-turn1.xirsys.com:5349?transport=tcp",
-  ],
-});
+// // second step, set STUN url
+// connection.iceServers.push({
+//   urls: [
+//     "turn:bn-turn1.xirsys.com:80?transport=udp",
+//     "turn:bn-turn1.xirsys.com:3478?transport=udp",
+//     "turn:bn-turn1.xirsys.com:80?transport=tcp",
+//     "turn:bn-turn1.xirsys.com:3478?transport=tcp",
+//     "turns:bn-turn1.xirsys.com:443?transport=tcp",
+//     "turns:bn-turn1.xirsys.com:5349?transport=tcp",
+//   ],
+// });
 
-// last step, set TURN url (recommended)
-connection.iceServers.push({
-  username:
-    "XsgQNxasaXVCCqkntYvxeBT_zG61w-IN8m0hzNwNocMT_adLD8DIGWkO4qjMCy0SAAAAAF6uqIh2ZW5rYXRlc2ht",
-  urls: [
-    "stun:bn-turn1.xirsys.com",
-    "turn:bn-turn1.xirsys.com:80?transport=udp",
-    "turn:bn-turn1.xirsys.com:3478?transport=udp",
-    "turn:bn-turn1.xirsys.com:80?transport=tcp",
-    "turn:bn-turn1.xirsys.com:3478?transport=tcp",
-    "turns:bn-turn1.xirsys.com:443?transport=tcp",
-    "turns:bn-turn1.xirsys.com:5349?transport=tcp",
-  ],
-  credential: "d282b8d0-8d2f-11ea-a6c5-9646de0e6ccd",
-});
+// // last step, set TURN url (recommended)
+// connection.iceServers.push({
+//   username:
+//     "XsgQNxasaXVCCqkntYvxeBT_zG61w-IN8m0hzNwNocMT_adLD8DIGWkO4qjMCy0SAAAAAF6uqIh2ZW5rYXRlc2ht",
+//   urls: [
+//     "stun:bn-turn1.xirsys.com",
+//     "turn:bn-turn1.xirsys.com:80?transport=udp",
+//     "turn:bn-turn1.xirsys.com:3478?transport=udp",
+//     "turn:bn-turn1.xirsys.com:80?transport=tcp",
+//     "turn:bn-turn1.xirsys.com:3478?transport=tcp",
+//     "turns:bn-turn1.xirsys.com:443?transport=tcp",
+//     "turns:bn-turn1.xirsys.com:5349?transport=tcp",
+//   ],
+//   credential: "d282b8d0-8d2f-11ea-a6c5-9646de0e6ccd",
+// });
 
+connection.iceServers = [
+  {
+    urls: [
+      "stun:stun.l.google.com:19302",
+      "stun:stun1.l.google.com:19302",
+      "stun:stun2.l.google.com:19302",
+      "stun:stun.l.google.com:19302?transport=udp",
+    ],
+  },
+];
 connection.videosContainer = document.getElementById("videos-container");
 connection.onstream = function (event) {
   var existing = document.getElementById(event.streamid);
